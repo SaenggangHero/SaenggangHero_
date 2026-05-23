@@ -660,7 +660,6 @@ export default function App() {
                               체크
                             </button>
                           </div>
-                          <p className="quick-range-help">예: 3부터 17까지 입력하면 3-17장이 한 번에 체크돼요.</p>
 
                           <div className="chapter-grid">
                             {Array.from({ length: book.chapters }, (_, index) => index + 1).map((chapter) => {

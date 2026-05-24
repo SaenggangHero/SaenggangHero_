@@ -158,8 +158,11 @@ export default function App() {
   const currentCheckedCount = selectedPerson ? checkedCount(selectedPerson.checked) : 0;
   const progressPercent = selectedPerson ? Math.round((currentCheckedCount / TOTAL_CHAPTERS) * 100) : 0;
   const totalCompletions = people.reduce((sum, person) => sum + person.completions.length, 0);
-  const todayReaders = people.filter((person) => person.completions.some((item) => item.date === todayText));
-
+const todayReaders = people.filter((person) => {
+  const readToday = Array.isArray(person.readingDates) && person.readingDates.includes(todayText);
+  const completedToday = person.completions.some((item) => item.date === todayText);
+  return readToday || completedToday;
+});
   useEffect(() => {
     const unsubscribe = onSnapshot(
       trackerDocRef,
